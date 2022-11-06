@@ -1,9 +1,7 @@
 const meserosModel = require('../dao/models/meseros')
 
 module.exports = class MeserosDB {
-    constructor() {
-
-    }
+    constructor() {}
 
     async listarMeseros(){
         let listaMeseros = await meserosModel.find()

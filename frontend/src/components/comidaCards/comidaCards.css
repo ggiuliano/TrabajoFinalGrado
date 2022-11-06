@@ -1,0 +1,6 @@
+.ui.card,
+.ui.cards>.card {
+    margin-left: 30px;
+    display: inline-block;
+    background-color: white;
+}

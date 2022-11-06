@@ -11,7 +11,10 @@ module.exports = routerEmpleados.get('/listaEmpleados', async (req, res) => {
 })
 
 module.exports = routerEmpleados.post('/crearEmpleado', async (req, res) => {
-    const nuevoEmpleado = await new Meseros().crearMesero({dni: req.body.dni, nombre: req.body.nombre, apellido: req.body.apellido})
+    const nuevoEmpleado = await new Meseros().crearMesero({
+        dni: req.body.dni,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido})
     res.send('Mesero creado con Exito')
 })
 
