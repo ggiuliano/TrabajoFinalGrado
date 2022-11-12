@@ -18,22 +18,29 @@ const useAxiosGet = (url) => {
 }
 
 
+
 const Menu = () => {
 
   const {items} = useAxiosGet(listadoProductos) //tengo todos los items
-  const allCategories = ['todas', ...new Set(items.map((item) => item.categoria))]  //tengo todas las categorias
+    //tengo todas las categorias
   const [itemsCarta, setItems] = useState(items);
-  const [lasCategorias, setCategories] = useState([])
+  const allCategories = ['todas', ...new Set(itemsCarta.map((item) => item.categoria))]
+  const [lasCategorias, setCategories] = useState([allCategories])
 
-  console.log(allCategories)
+
+  console.log(lasCategorias)
+
+
 
   const filterItems = (categoria) => {
       if (categoria === 'todas') {
         setItems(items)
+        console.log(itemsCarta)
         return
       }
       const newItems = items.filter((item) => item.categoria === categoria)
       setItems(newItems)
+      console.log(itemsCarta)
     }
 
 
@@ -47,7 +54,7 @@ const Menu = () => {
           <div className="underline"></div>
         </div>
         <Categorias categories={lasCategorias} filterItems={filterItems} />
-        <div class='ui_cards'>
+        <div className='ui_cards'>
           <ComidaCards productos={items}/>
         </div>
       </section>
