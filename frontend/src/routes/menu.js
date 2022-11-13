@@ -1,11 +1,16 @@
-import React from 'react'
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+
 import Categorias from '../components/menu/categorias'
 import ComidaCards from '../components/comidaCards/comidaCards'
-const listadoProductos = 'http://localhost:8080/prd/listadoCarta'
+import InputMesa from '../components/inputMesa/inputmesa'
 
-const useAxiosGet = (url) => {
+const listadoCarta = 'http://localhost:8080/prd/listadoCarta'
+const listadoMeseros = 'http://localhost:8080/emp/listaempleados'
+
+
+
+const useAxiosGetItems = (url) => {
   const [items, setMenuItems] = useState([])
 
   useEffect(() => {
@@ -17,46 +22,69 @@ const useAxiosGet = (url) => {
   return {items};
 }
 
+const useAxiosGetMeseros = (url) => {
+  const [meseros, setMeseros] = useState([])
 
+  useEffect(() => {
+    axios.get(url)
+    .then((response) => setMeseros(response.data))
+    .catch(error => console.error(`Error: ${error}`))
+  }, []);
+
+  return {meseros};
+}
 
 const Menu = () => {
 
-  const {items} = useAxiosGet(listadoProductos) //tengo todos los items
-    //tengo todas las categorias
+  const {items} = useAxiosGetItems(listadoCarta) //tengo todos los items
+  const {meseros} = useAxiosGetMeseros(listadoMeseros)
+  const allCategories = ['todas', ...new Set(items.map((item) => item.categoria))] //tengo todas las categorias
   const [itemsCarta, setItems] = useState(items);
-  const allCategories = ['todas', ...new Set(itemsCarta.map((item) => item.categoria))]
-  const [lasCategorias, setCategories] = useState([allCategories])
+  const [mesero, setMeseroPedido] = useState()
+  const [pedido, setPedido] = useState()
 
-
-  console.log(lasCategorias)
-
-
+  
+  //const [lasCategorias, setCategories] = useState(allCategories)
 
   const filterItems = (categoria) => {
       if (categoria === 'todas') {
         setItems(items)
-        console.log(itemsCarta)
         return
       }
       const newItems = items.filter((item) => item.categoria === categoria)
       setItems(newItems)
-      console.log(itemsCarta)
     }
 
+  const handleChange = (event) => {
+    setMeseroPedido(event.target.value)
+  }
 
-  //console.log(allCategories)
-  
-    
   return (
       <section className="menu section" id='menuSelection'>
         <div className="title">
-          <h2>Nuestro Menu</h2>
+          <h2>Menu</h2>
+        <div className="underline"></div>
+        </div>
+        <Categorias categories={allCategories} filterItems={filterItems} />
+        <div className='ui_cards'>
+          <ComidaCards productos={itemsCarta}/>
+        </div>
+        <div className="title">
+          <h2>Resumen Pedido</h2>
           <div className="underline"></div>
         </div>
-        <Categorias categories={lasCategorias} filterItems={filterItems} />
-        <div className='ui_cards'>
-          <ComidaCards productos={items}/>
+        <div>
+        <select className="ui search dropdown" onChange={handleChange}>
+          <option disabled selected value="" >Mesero...</option>
+          {meseros.map(mesero => (
+            <option value={mesero.nombre} key={mesero._id}>{mesero.nombre}</option>
+          ))}
+        </select>
+        <br/>
+        <br/>
+        <InputMesa/>
         </div>
+
       </section>
   );
 };

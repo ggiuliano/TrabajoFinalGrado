@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 import './comidaCards.css'
 
 function ComidaCards (data) {
-  const displayProductos = (data) => {
+  const DisplayProductos = (data) => {
     const {productos} = data;
 
     return(
-      productos.map((producto, index) => {
+      productos.map((producto) => {
         return(
           <Card>
             {/* <Image src={producto.foto} wrapped ui={false} /> */}
@@ -38,7 +38,7 @@ function ComidaCards (data) {
   
   return (
     <>
-    {displayProductos(data)}
+    {DisplayProductos(data)}
     </>
   )
 

@@ -5,6 +5,7 @@ import './styles.css'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Menu from './routes/menu'
+import Chatbot from './routes/chatbot';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/menu' element={<Menu/>} />
+          <Route path='/reservas' element={<Chatbot/>} />
         </Routes>
       </Router>
     </main>
