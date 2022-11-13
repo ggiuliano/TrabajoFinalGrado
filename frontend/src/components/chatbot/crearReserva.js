@@ -5,20 +5,19 @@ class Post extends Component {
     constructor(props) {
         super(props);
         const { steps } = this.props;
-        const { submit, firstname, lastname, email } = steps;
+        const { fecha, hora, nombreReserva } = steps;
     
-        this.state =  { submit, firstname, lastname, email }; 
+        this.state =  { fecha, hora, nombreReserva }; 
     }
     
   
     componentDidMount() {
         const userObject = {
-            submit:this.state.submit.value,
-            first_name:this.state.firstname.value,
-            last_name:this.state.lastname.value,
-            email:this.state.email.value,
+            fecha:this.state.fecha.value,
+            hora:this.state.hora.value,
+            nombreReserva:this.state.nombreReserva.value,
         };
-        axios.post(`/api`, userObject)
+        axios.post(`https://localhost:8080/rsv/crearReserva`, userObject)
         .then(res => {
           console.log(res.status)
         }).catch(function(error) {
@@ -28,7 +27,7 @@ class Post extends Component {
   
     render() {
         return (
-            <div>Thank you! Your data was submitted successfully!</div>
+            <div>Gracias! Su reserva fue creada con exito</div>
             );
    }    
      

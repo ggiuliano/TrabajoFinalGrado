@@ -4,14 +4,16 @@ const reservasModel = require('../dao/models/reserva')
 module.exports = class ReservasDB {
     constructor() {}
 
-    async listarReservas(){
+    async listarTotalReservas(){
         let listaReservas = await reservasModel.find()
         return listaReservas
     }
 
     async crearReserva({fecha, hora, nombreReserva}){
+        let totalReservas = await this.listarTotalReservas()
+        let cantidad = totalReservas.length + 1
         let nuevaReserva = {
-            id: 'r' + nombreReserva,
+            id: cantidad,
             fecha,
             hora,
             nombreReserva
