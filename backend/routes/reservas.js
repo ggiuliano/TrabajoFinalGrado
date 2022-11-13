@@ -17,6 +17,11 @@ module.exports = routerReservas.post('/crearReserva', async (req, res) => {
     res.send('Reserva creada con Exito')
 })
 
+module.exports = routerReservas.get('/verReserva/:id', async (req, res) => {
+    const verReserva = await new Reservas().verReserva(req.params.id)
+    res.send(verReserva)
+})
+
 
 
 

@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Post extends Component {
-
+class CancelReserva extends Component {
     constructor(props) {
         super(props);
         const { steps } = this.props;
-        const { fecha, hora, nombreReserva } = steps;
+        const { submit, fecha, hora, nombreReserva } = steps;
     
-        this.state =  { fecha, hora, nombreReserva }; 
+        this.state =  { submit, fecha, hora, nombreReserva }; 
     }
     
   
     componentDidMount() {
         // const userObject = {
+        //     submit: this.state.submit.value,
         //     fecha:this.state.fecha.value,
         //     hora:this.state.hora.value,
         //     nombreReserva:this.state.nombreReserva.value,
         // };
-        // console.log(userObject)
-
-        // axios.post(`http://localhost:8080/rsv/crearReserva`, userObject)
+        // axios.get(`http://localhost:8080/rsv/listaTotalReservas`, userObject)
         // .then(res => {
         //   console.log(res.status)
         // }).catch(function(error) {
@@ -31,12 +29,11 @@ class Post extends Component {
     render() {
         return (
             <div>
-                <p>Gracias! Su reserva fue creada con exito</p>
-                <p>id de reserva: 10</p>
+                <p>Su reserva fue cancelada</p>
             </div>
             );
    }    
      
   };
   
-export default Post;
+  export default CancelReserva;

@@ -9,6 +9,17 @@ module.exports = class ReservasDB {
         return listaReservas
     }
 
+    async verReserva(id){
+        let listaReservas = await this.listarTotalReservas()
+        if(typeof id == 'undefined' ){
+            return 'Error'
+        }else{
+            let reservaBuscada = listaReservas.filter(x => x.id === (id))
+            return reservaBuscada
+        }
+    }
+
+
     async crearReserva({fecha, hora, nombreReserva}){
         let totalReservas = await this.listarTotalReservas()
         let cantidad = totalReservas.length + 1

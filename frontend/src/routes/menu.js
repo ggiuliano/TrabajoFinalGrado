@@ -4,6 +4,8 @@ import axios from 'axios'
 import Categorias from '../components/menu/categorias'
 import ComidaCards from '../components/comidaCards/comidaCards'
 import InputMesa from '../components/inputMesa/inputmesa'
+import Pedidos from '../components/pedidos/pedidos'
+import ConfirmaPedido from '../components/pedidos/confirmaPedido'
 
 const listadoCarta = 'http://localhost:8080/prd/listadoCarta'
 const listadoMeseros = 'http://localhost:8080/emp/listaempleados'
@@ -55,34 +57,30 @@ const Menu = () => {
       setItems(newItems)
     }
 
-  const handleChange = (event) => {
-    setMeseroPedido(event.target.value)
-  }
-
   return (
       <section className="menu section" id='menuSelection'>
         <div className="title">
-          <h2>Menu</h2>
+          <h2>Tomar Orden</h2>
         <div className="underline"></div>
         </div>
         <Categorias categories={allCategories} filterItems={filterItems} />
         <div className='ui_cards'>
           <ComidaCards productos={itemsCarta}/>
         </div>
-        <div className="title">
+        {/* <div className="title">
           <h2>Resumen Pedido</h2>
           <div className="underline"></div>
         </div>
         <div>
-        <select className="ui search dropdown" onChange={handleChange}>
-          <option disabled selected value="" >Mesero...</option>
-          {meseros.map(mesero => (
-            <option value={mesero.nombre} key={mesero._id}>{mesero.nombre}</option>
-          ))}
-        </select>
-        <br/>
-        <br/>
         <InputMesa/>
+        </div>
+        <br/>
+        <div>
+        <Pedidos/>
+        </div> */}
+        <br/>
+        <div>
+        <ConfirmaPedido/>
         </div>
 
       </section>
